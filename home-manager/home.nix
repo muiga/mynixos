@@ -56,7 +56,7 @@
       persepolis
       lightly-qt
       sierra-breeze-enhanced
-      pcloud
+ #     pcloud
       obs-studio
       easyeffects
       nodejs_18
@@ -84,6 +84,7 @@
     # '';
   };
 
+  #programs.dconf.enable = true;
   # You can also manage environment variables but you will have to manually
   # source
   #
