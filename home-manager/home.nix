@@ -56,7 +56,7 @@
       persepolis
       lightly-qt
       sierra-breeze-enhanced
- #     pcloud
+      onedrive
       obs-studio
       easyeffects
       nodejs_18
@@ -67,6 +67,7 @@
       libreoffice
       pdfarranger
       winbox
+      pcloud
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
