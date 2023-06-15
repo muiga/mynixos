@@ -8,7 +8,6 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      <home-manager/nixos>
     ];
 
   # Bootloader.
@@ -84,7 +83,7 @@
   # Enable CUPS to print documents.
     printing = {                                # Printing and drivers for TS5300
       enable = true;
-      #drivers = [ pkgs.cnijfilter2 ];          # There is the possibility cups will complain about missing cmdtocanonij3. I guess this is just an error that can be ignored for now. Also no longer need required since server uses ipp to share printer over network.
+      drivers = [ pkgs.epson-escpr2  ];          # There is the possibility cups will complain about missing cmdtocanonij3. I guess this is just an error that can be ignored for now. Also no longer need required since server uses ipp to share printer over network.
     };
     avahi = {                                   # Needed to find wireless printer
       enable = true;
@@ -162,29 +161,29 @@
     description = "Stephen M Kamau";
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.zsh;
-    packages = with pkgs; [
-      firefox
-      kate
-      vscode
-      vlc
-      brave
-      git
-      curl
-      thunderbird
-      latte-dock
-      gimp-with-plugins
-      inkscape-with-extensions
-      postman
-      haruna
-      discord
-      motrix
-      persepolis
-      lightly-qt
-      sierra-breeze-enhanced
-      pcloud
-      obs-studio
-      easyeffects
-    ];
+    # packages = with pkgs; [
+    #   firefox
+    #   kate
+    #   vscode
+    #   vlc
+    #   brave
+    #   git
+    #   curl
+    #   thunderbird
+    #   latte-dock
+    #   gimp-with-plugins
+    #   inkscape-with-extensions
+    #   postman
+    #   haruna
+    #   discord
+    #   motrix
+    #   persepolis
+    #   lightly-qt
+    #   sierra-breeze-enhanced
+    #   pcloud
+    #   obs-studio
+    #   easyeffects
+    # ];
 
     
   };
@@ -211,8 +210,7 @@
     })
   ];
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -221,12 +219,14 @@
   #  wget
   #];
   environment = {
-    systemPackages = with pkgs.libsForQt5;[
-      packagekit-qt
-      bismuth
-      kdenlive
-      sddm-kcm
-      kdeconnect-kde	
+    systemPackages = with pkgs;[
+      libsForQt5.packagekit-qt
+      libsForQt5.bismuth
+      libsForQt5.kdenlive
+      libsForQt5.sddm-kcm
+      libsForQt5.kdeconnect-kde
+      epson-escpr2
+	
     ];
     shells = with pkgs; [
       zsh
@@ -265,68 +265,8 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   # system.stateVersion = "23.05"; # Did you read the comment?
 
-  # home-manager.useGlobalPkgs = true;
-  # home-manager.users.muiga = { pkgs, ... }: {
-  #  home.packages = [ pkgs.atool pkgs.httpie ];
-  #   programs = {
-  #    zsh = {
-  #       enable = true;
-  #       # autosuggestions.enable = true;            # Auto suggest options and highlights syntax, searches in history for options
-  #       # syntaxHighlighting.enable = true;
-  #       # enableCompletion = true;
-  #       # histSize = 100000;
-
-  #       # ohMyZsh = {                               # Extra plugins for zsh
-  #       #   enable = true;
-  #       #   plugins = [ "git" ];
-  #       # };
-
-  #       # shellInit = ''                            # Zsh theme
-  #       #   # Spaceship
-  #       #   source ${pkgs.spaceship-prompt}/share/zsh/site-functions/prompt_spaceship_setup
-  #       #   autoload -U promptinit; promptinit
-  #       #   # Hook direnv
-  #       #   #emulate zsh -c "$(direnv hook zsh)"
-  #       #   # Swag
-  #       #   ${pkgs.nitch}/bin/nitch
-
-  #       #   #eval "$(direnv hook zsh)"
-  #       # '';
-  #     };
-  #   };
-  # };
-
-
-   home-manager.users.muiga = { pkgs, ... }: {
-   home.packages = [ pkgs.atool pkgs.httpie ];
-    # programs = {
-    #  zsh = {
-    #     enable = true;
-    #     # autosuggestions.enable = true;            # Auto suggest options and highlights syntax, searches in history for options
-    #     # syntaxHighlighting.enable = true;
-    #     # enableCompletion = true;
-    #     # histSize = 100000;
-
-    #     # ohMyZsh = {                               # Extra plugins for zsh
-    #     #   enable = true;
-    #     #   plugins = [ "git" ];
-    #     # };
-
-    #     # shellInit = ''                            # Zsh theme
-    #     #   # Spaceship
-    #     #   source ${pkgs.spaceship-prompt}/share/zsh/site-functions/prompt_spaceship_setup
-    #     #   autoload -U promptinit; promptinit
-    #     #   # Hook direnv
-    #     #   #emulate zsh -c "$(direnv hook zsh)"
-    #     #   # Swag
-    #     #   ${pkgs.nitch}/bin/nitch
-
-    #     #   #eval "$(direnv hook zsh)"
-    #     # '';
-    #   };
-    # };
-  };
-
+    # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
 
   nix = {                                   # Nix Package Manager settings
     settings ={
